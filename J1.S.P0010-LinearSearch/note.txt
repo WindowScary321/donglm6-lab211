@@ -1,0 +1,35 @@
+* Yeu cau phan mem
+Nguoi dung nhap so luong phan tu n vao phan mem (n la so nguyen duong, n > 0)
+Tao mang co n phan tu, moi phan tu la mot so nguyen ngau nhien trong khoang tu -n den n
+In toan bo mang da sinh ra
+Nguoi dung nhap so can tim (so nguyen)
+Tim kiem so can tim trong mang bang thuat toan Linear Search
+In ra tat ca cac vi tri (index) cua so can tim trong mang; neu khong tim thay thi thong bao khong ton tai trong mang
+
+* Mo ta thuat toan
+Linear Search tim kiem phan tu bang cach duyet lan luot tung phan tu tu dau mang den cuoi mang
+So sanh tung phan tu trong mang voi so can tim, neu bang nhau thi luu lai vi tri (index) cua phan tu do
+Neu so can tim xuat hien nhieu lan, tiep tuc duyet den het mang de lay tat ca cac vi tri
+Neu duyet het mang ma khong tim thay phan tu nao bang so can tim thi thong bao khong ton tai trong mang
+
+* Testcase
+- Nhap so luong phan tu n:
+1. Nhap bo trong (rong hoac khoang trang): thong bao loi dau vao khong hop le va yeu cau nhap lai
+2. Nhap ky tu ("abc") hoac so thuc ("5.5"): thong bao loi khong phai so nguyen va yeu cau nhap lai
+3. Nhap n = 0 hoac n < 0 ("0", "-5"): thong bao loi khong thoa man n > 0 va yeu cau nhap lai
+4. Nhap n > 0 hop le ("1", "10"): tao mang co n so nguyen ngau nhien tu -n den n
+
+- Nhap so can tim:
+5. Nhap bo trong (rong hoac khoang trang): thong bao loi dau vao khong hop le va yeu cau nhap lai
+6. Nhap ky tu ("abc") hoac so thuc ("5.5"): thong bao loi khong phai so nguyen va yeu cau nhap lai
+7. Nhap so nguyen hop le (so am, 0 hoac so duong, VD: "-3", "0", "6"): thuc hien tim kiem trong mang
+
+- Ket qua tim kiem:
+8. Mang co 1 phan tu (n = 1):
+   VD: [1], nhap so can tim "1", ket qua: tim thay tai index 0
+9. Tim phan tu nam o dau mang (index 0), giua mang hoac cuoi mang (index n - 1):
+   VD: [2, -1, 5, 8, -3], nhap "2" -> index 0; nhap "5" -> index 2; nhap "-3" -> index 4
+10. Tim phan tu xuat hien nhieu lan trong mang: in day du tat ca cac vi tri index
+    VD: [2, 6, 3, 6, 8, 6, -1], nhap "6", ket qua: tim thay tai index 1, 3, 5
+11. Tim phan tu khong ton tai trong mang:
+    VD: [2, 6, 3, 6, 8, 6, -1], nhap "9", ket qua: thong bao khong ton tai trong mang

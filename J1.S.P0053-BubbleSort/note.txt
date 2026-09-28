@@ -1,0 +1,19 @@
+* Yeu cau phan mem
+Nguoi dung nhap so luong phan tu n vao phan mem (n la so nguyen duong, n > 0)
+Tao mang co n phan tu, moi phan tu la mot so nguyen ngau nhien trong khoang tu -n den n
+In toan bo mang truoc khi sap xep
+Sap xep mang theo thu tu tang dan bang thuat toan Bubble Sort, sau do in mang sau khi sap xep
+
+* Mo ta thuat toan
+Bubble Sort sap xep mang bang cach duyet nhieu luot tu dau mang den cuoi mang
+So sanh tung cap phan tu lien ke, neu phan tu dung truoc lon hon phan tu dung sau thi doi cho hai phan tu do
+Sau moi luot duyet, phan tu lon nhat trong phan chua sap xep se duoc dua ve cuoi day
+Lap lai cac luot duyet cho den khi toan bo mang duoc sap xep tang dan
+
+* Testcase
+1. Nhap bo trong (rong hoac khoang trang): thong bao loi dau vao khong hop le va yeu cau nhap lai
+2. Nhap ky tu ("abc") hoac so thuc ("5.5"): thong bao loi khong phai so nguyen va yeu cau nhap lai
+3. Nhap n = 0 hoac n < 0 ("0", "-5"): thong bao loi khong thoa man n > 0 va yeu cau nhap lai
+4. Nhap "1": tao mang mot phan tu; mang sau sap xep giong mang ban dau
+5. Nhap "10": tao mang co 10 so nguyen ngau nhien tu -10 den 10, hien ca mang truoc va sau sap xep
+   VD: [2, 6, 3, 6, 8, 6, -1, -2, 9, 8], ket qua: [-2, -1, 2, 3, 6, 6, 6, 8, 8, 9]

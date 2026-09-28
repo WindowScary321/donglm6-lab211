@@ -1,0 +1,33 @@
+* Giai thich thuat toan :
+thuat toan linear search la thuat toan tim kiem tuyen tinh
+phan mem duyet qua tung phan tu trong mang tu dau den cuoi
+So sanh tung phan tu trong mang voi so can tim
+Neu tim thay thi se luu lai vi tri cua phan tu do
+Neu so can tim xuat hien nhieu lan, tiep tuc duyet den het mang de lay tat ca cac vi tri
+Neu duyet het mang ma khong tim thay thi thong bao khong ton tai trong mang
+
+* Yeu cau de bai:
+Nguoi dung nhap so luong phan tu cua mang la mot so nguyen duong n
+Phan mem tao ra mang chua cac so nguyen ngau nhien tu -n den n
+In mang da sinh ra
+Nguoi dung nhap so can tim trong mang
+Phan mem dung thuat toan linear search de tim index cua so can tim trong mang
+In index cua so can tim, neu so can tim xuat hien nhieu lan thi in ra index cua tat ca cac vi tri
+Neu khong tim thay thi bao khong ton tai trong mang
+
+* Testcase
+- test input :Nhap so luong phan tu trong mang
+Truong hop sai: Nhap khoang trang, ky tu/chu cai, so thuc, so am hoac so 0 (phan mem bao loi va bat buoc nhap lai)
+Truong hop dung: Nhap so nguyen duong hop le (vi du: n = 1, n = 5, n = 20)
+
+- test input : nhap so can tim
+Truong hop sai: Nhap khoang trang, ky tu/chu cai hoac so thuc (phan mem bao loi va bat buoc nhap lai)
+Truong hop dung: Nhap so nguyen hop le bao gom so am, so 0 hoac so duong (vi du: -3, 0, 5)
+
+- test thuat toan :
+Tim phan tu nam o dau mang (index 0)
+Tim phan tu nam o giua mang
+Tim phan tu nam o cuoi mang (index n - 1)
+Tim phan tu khong ton tai trong mang
+Tim phan tu trong mang chi co duy nhat 1 phan tu (n = 1)
+Tim phan tu xuat hien nhieu lan trong mang va in day du tat ca cac vi tri index

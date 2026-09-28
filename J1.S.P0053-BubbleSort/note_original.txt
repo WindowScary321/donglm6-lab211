@@ -1,0 +1,23 @@
+* Mo ta thuat toan
+Bubble Sort so sanh tung cap phan tu lien ke tu dau mang den cuoi mang
+Neu phan tu ben trai lon hon ben phai thi doi cho hai phan tu. Sau mot luot duyet, phan tu lon nhat trong phan chua sap xep nam o cuoi phan do
+- Bat dau voi mang chua sap xep gom n phan tu
+- Duyet lan luot cac cap a[j] va a[j + 1]. Neu a[j] > a[j + 1], doi cho chung; neu khong, giu nguyen
+(hay rut ngan, lam don gian hoa, ko nen giai thich code)
+- Lap lai cac luot duyet cho den khi mang duoc sap xep
+
+* Yeu cau phan mem
+1. Nguoi dung nhap so luong phan tu n vao phan mem, phai la so nguyen n > 0
+   Neu bo trong, nhap ky tu, nhap so thuc, n = 0 hoac n < 0, thong bao loi va yeu cau nhap lai
+   (Nen dua xuong testcase)
+3. Tao mang co n phan tu. Moi phan tu la mot so nguyen ngau nhien trong khoang -n den n
+4. In toan bo mang truoc khi sap xep
+5. Sap xep mang theo thu tu tang dan bang Bubble Sort, sau do in mang sau khi sap xep
+
+* Testcase
+1. Nhap rong: thong bao dau vao khong hop le, yeu cau nhap lai
+2. Nhap "abc" hoac "5.5": khong phai so nguyen, yeu cau nhap lai
+3. Nhap "0" hoac "-5": khong thoa n > 0, yeu cau nhap lai
+4. Nhap "1": tao mang mot phan tu; mang sau sap xep giong mang ban dau
+5. Nhap "10": tao mang co 10 so, hien ca mang truoc va sau sap xep
+   VD: [2, 6, 3, 6, 8, 6, -1, -2, 9, 8], ket qua: [-2, -1, 2, 3, 6, 6, 6, 8, 8, 9]
