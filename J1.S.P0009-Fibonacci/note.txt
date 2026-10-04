@@ -1,0 +1,15 @@
+* Mo ta thuat toan
+Day so Fibonacci gom cac so 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... trong do moi so bang tong 2 so lien truoc;
+Chuong trinh tinh tung gia tri F(n) bang de quy: ham tu goi lai chinh no voi bai toan nho hon cho den khi gap dieu kien dung
+- Neu n = 0, tra ve 0
+- Neu n = 1, tra ve 1
+- Neu n > 1, goi lai F(n-1) + F(n-2), luu ket qua vao mang nho, tang toc do tinh toan
+
+* Yeu cau phan mem
+- Su dung de quy de tim cac so trong day Fibonacci
+- In ra day du 45 so dau tien kem chi so (index)
+
+* Testcase
+1. In day du 45 so dau tien trong day Fibonacci kem chi so (index)
+2. Xac minh day la 45 so dau tien theo cong thuc F(n) = F(n-1) + F(n-2)
+3. Chung minh phan mem su dung de quy bang viec ham getFiboNum() tu goi lai chinh no tai buoc de quy

@@ -1,0 +1,4 @@
+De tinh toan day so nhanh, ta su dung de quy de tinh toan, bang cach tu goi chinh no trong suot vong tinh toan
+- Neu dau vao = 0, tra ve 0
+- Neu dau vao = 1, tra ve 1
+- Neu dau vao >1, thuc hien tinh toan de quy: fibo(n) = fibo(n-1) + fibo(n-2)
