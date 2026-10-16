@@ -5,10 +5,11 @@ In toan bo mang truoc khi sap xep
 Sap xep mang theo thu tu tang dan bang thuat toan Bubble Sort, sau do in mang sau khi sap xep
 
 * Mo ta thuat toan
-Bubble Sort sap xep mang bang cach duyet nhieu luot tu dau mang den cuoi mang
+Bubble Sort sap xep mang bang cach duyet nhieu luot tu dau mang den cuoi phan chua sap xep
 So sanh tung cap phan tu lien ke, neu phan tu dung truoc lon hon phan tu dung sau thi doi cho hai phan tu do
-Sau moi luot duyet, phan tu lon nhat trong phan chua sap xep se duoc dua ve cuoi day
-Lap lai cac luot duyet cho den khi toan bo mang duoc sap xep tang dan
+Sau moi luot duyet, phan tu lon nhat trong phan chua sap xep se duoc dua ve cuoi day va khong can xet lai o luot sau
+Dieu kien dung: neu mot luot duyet khong xay ra bat ky lan doi cho nao thi mang da duoc sap xep va thuat toan dung
+Trong truong hop van con doi cho, tiep tuc duyet; thuat toan cung se dung sau toi da n - 1 luot vi khi do tat ca phan tu da o dung vi tri
 
 * Testcase
 1. Nhap bo trong (rong hoac khoang trang): thong bao loi dau vao khong hop le va yeu cau nhap lai
@@ -17,3 +18,29 @@ Lap lai cac luot duyet cho den khi toan bo mang duoc sap xep tang dan
 4. Nhap "1": tao mang mot phan tu; mang sau sap xep giong mang ban dau
 5. Nhap "10": tao mang co 10 so nguyen ngau nhien tu -10 den 10, hien ca mang truoc va sau sap xep
    VD: [2, 6, 3, 6, 8, 6, -1, -2, 9, 8], ket qua: [-2, -1, 2, 3, 6, 6, 6, 8, 8, 9]
+
+- Kiem tra thuat toan:
+6. Mang da duoc sap xep tang dan:
+   VD: [-3, -1, 0, 2, 5], ket qua: [-3, -1, 0, 2, 5]
+   Khong co lan doi cho; thuat toan dung som sau luot duyet dau tien
+
+7. Mang duoc sap xep theo thu tu giam dan:
+   VD: [5, 3, 1, 0, -2], ket qua: [-2, 0, 1, 3, 5]
+   Day la truong hop xau nhat; thuat toan co the can toi da n - 1 luot
+
+8. Mang co cac phan tu trung nhau:
+   VD: [3, 1, 3, -1, 1, 3], ket qua: [-1, 1, 1, 3, 3, 3]
+   Tat ca phan tu trung nhau phai duoc giu lai day du
+
+9. Mang co tat ca phan tu bang nhau:
+   VD: [4, 4, 4, 4], ket qua: [4, 4, 4, 4]
+   Khong co lan doi cho nao; thuat toan dung som
+
+10. Mang co hai phan tu da dung thu tu:
+    VD: [-1, 2], ket qua: [-1, 2]
+
+11. Mang co hai phan tu nguoc thu tu:
+    VD: [2, -1], ket qua: [-1, 2]
+
+12. Mang gom so am, so 0 va so duong:
+    VD: [0, -5, 3, -2, 4], ket qua: [-5, -2, 0, 3, 4]
