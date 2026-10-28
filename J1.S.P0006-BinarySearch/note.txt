@@ -1,0 +1,49 @@
+* Yeu cau phan mem
+Nguoi dung nhap so luong phan tu n vao phan mem (n la so nguyen duong, n > 0)
+Tao mang co n phan tu, moi phan tu la mot so nguyen ngau nhien trong khoang tu -n den n
+Sap xep mang da tao bang BubbleSort sau do in toan bo mang 
+Tim gia tri do bang Binary Search, in tung buoc tim kiem va ket qua
+Neu tim thay, in toan bo cac vi tri (index) cua so can tim, neu ko thi thong bao ko ton tai trong mang
+
+* Mo ta thuat toan
+Thuat toan Binary Search chi ap dung khi mang da duoc sap xep tang dan
+Thay vi phai kiem tra tung so tu dau den cuoi, ta chia doi mang ra de tim kiem:
++ Dau tien, lay phan tu o giua de so sanh voi so can tim:
+  Cach tim: lay (dau + cuoi) / 2 roi lam tron xuong (VD: 11 / 2 = 5)
+  Mang le thi lay dung so o giua, mang chan thi lay hoi lech ve ben trai
++ Neu phan tu o giua dung bang so can tim thi luu lai va tiep tuc tim so can tim xuat hien nhieu lan
++ Neu so can tim nho hon phan tu o giua, ta bo han nua ben phai va tiep tuc tim kiem o nua ben trai
++ Neu so can tim lon hon phan tu o giua, ta bo han nua ben trai va tiep tuc tim kiem o nua ben phai
+Sau moi lan so sanh, pham vi tim kiem lai giam di mot nua. Qua trinh nay lap di lap lai cho den khi tim thay so can tim
+Neu khi pham vi tim kiem khong con phan tu nao nua thi so can tim ko xuat hien trong mang
+
+- Neu so can tim xuat hien nhieu lan:
+Do mang da duoc sap xep nen tat ca cac so giong nhau se dat canh nhau
+Ta quet sang trai de tim phan tu trung dau tien va quet sang phai de tim phan tu trung cuoi cung, sau do lay toan bo vi tri vao danh sach ket qua
+
+* Testcase
+- Nhap so luong phan tu n:
+1. Nhap bo trong (rong hoac khoang trang): thong bao loi dau vao khong hop le va yeu cau nhap lai
+2. Nhap ky tu ("abc") hoac so thuc ("5.5"): thong bao loi khong phai so nguyen va yeu cau nhap lai
+3. Nhap n = 0 hoac n < 0 ("0", "-5"): thong bao loi khong thoa man n > 0 va yeu cau nhap lai
+4. Nhap n > 0 hop le ("1", "10"): tao mang co n so nguyen ngau nhien tu -n den n
+
+- Nhap so can tim:
+5. Nhap bo trong (rong hoac khoang trang): thong bao loi dau vao khong hop le va yeu cau nhap lai
+6. Nhap ky tu ("abc") hoac so thuc ("5.5"): thong bao loi khong phai so nguyen va yeu cau nhap lai
+7. Nhap so nguyen hop le (so am, 0 hoac so duong, VD: "-3", "0", "6"): thuc hien tim kiem trong mang
+
+- Kiem tra sap xep va tim kiem:
+11. Sap xep mang da tang dan:
+    VD: [3, 1, 3, -1, 1] -> [-1, 1, 1, 3, 3]
+12. Mang 1 phan tim thay: [4], tim 4 -> index 0
+13. Mang 1 phan ko tim thay: [4], tim 5 -> khong tim thay
+14. Tim o dau:  [-3, 0, 2, 5, 8], tim -3 -> index 0
+15. Tim o giua: [-3, 0, 2, 5, 8], tim 2 -> index 2
+16. Tim o cuoi: [-3, 0, 2, 5, 8], tim 8 -> index 4
+17. Khong tim thay o hai phia hoac giua cac gia tri: [-3, 0, 2, 5, 8], tim -4, 6, 9 -> -1 va thong bao khong ton tai
+18. Phan tu trung nhau xuat hien nhieu lan:
+    VD: [1, 1, 1, 1, 3, 4, 6, 8, 9, 9], tim 1 -> Found 1 at index: 0, 1, 2, 3; tim 9 -> Found 9 at index: 8, 9
+    VD: [2, 2, 2], tim 2 -> Found 2 at index: 0, 1, 2
+19. Do dai chan va le: [-1, 2], tim 2 -> index 1; [-3, 0, 2, 5, 8], tim 2 -> index 2
+
