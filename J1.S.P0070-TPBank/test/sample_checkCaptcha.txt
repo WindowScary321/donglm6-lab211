@@ -1,0 +1,78 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+      while (true){
+        
+        String captcha = generateCaptcha();
+        System.out.println("Captcha: " + captcha);
+        
+        String input = scanner.nextLine();
+        System.out.println(checkCaptcha(input, captcha));
+        }
+    }
+
+
+    public static String generateCaptcha() {
+        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder reqString = new StringBuilder();
+        Random random = new Random();
+        // Dung vong for de tao 5 ky tu captcha bang StringBuilder
+        for (int i = 0; i < 5; i++) {
+            // Chon 1 trong nhung ky tu o bien chars de dua vao ma catpcha
+            int index = random.nextInt(chars.length());
+            reqString.append(chars.charAt(index));
+        }
+        return reqString.toString(); // Tra ve ma captcha
+
+    }
+
+    /* Ham checkCaptcha
+     * Muc dich: Kiem tra captcha do nguoi dung nhap
+     * Cach thuc: Dung vong for duyet qua tung ky tu cua captchaInput.
+     * Su dung contains de kiem tra ky tu do co giong voi ky tu tai vi tri tuong ung trong captchaGenerate khong.
+     * Dam bao nguoi dung nhap dung ky tu, dung thu tu, ghep lien tiep (co the khong can nhap het).
+     * Dau vao: captchaInput chuoi nguoi dung nhap, captchaGenerate ma captcha duoc sinh ra
+     * Dau ra: true neu hop le, nguoc lai la false
+     */
+    public static boolean checkCaptcha(String captchaInput, String captchaGenerate) {
+        if (captchaInput == null || captchaInput.isEmpty()) {
+            return false;
+        }
+
+        // Neu do dai chuoi nhap vao dai hon ca ma captcha goc thi chac chan sai
+        if (captchaInput.length() > captchaGenerate.length()) {
+            return false;
+        }
+
+        // Tim vi tri bat dau trung khop cua chuoi input trong chuoi goc
+        // Ví dụ: nhập "3D" vào "dy3D4" -> tim thay vi tri bat dau la index = 2
+        int startIndex = captchaGenerate.indexOf(Character.toString(captchaInput.charAt(0)));
+        if (startIndex == -1) {
+            return false; // Ky tu dau tien cua input hoan toan khong co trong captcha goc
+        }
+
+        // Duyet qua tung ky tu cua chuoi nhap vao
+        for (int i = 0; i < captchaInput.length(); i++) {
+            // Tinh toan vi tri tuong ung can kiem tra trong chuoi captcha gốc
+            int targetIndex = startIndex + i;
+            
+            // Neu vuot qua do dai cua captcha goc -> Sai
+            if (targetIndex >= captchaGenerate.length()) {
+                return false;
+            }
+
+            String inputChar = Character.toString(captchaInput.charAt(i));
+            
+            // Ép ham contains chi kiem tra tai dung vi tri hien tai bang cach lay duy nhat 1 ky tu do ra
+            String expectedChar = Character.toString(captchaGenerate.charAt(targetIndex));
+
+            // Dung contains theo yeu cau cua de bai
+            if (!expectedChar.contains(inputChar)) {
+                return false; // Chi can 1 ky tu sai thu tu hoac ngat quang la bao false ngay
+            }
+        }
+        return true; 
+    }
+}

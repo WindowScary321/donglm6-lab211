@@ -1,0 +1,246 @@
+* Yeu cau phan mem
+Chuong trinh quan ly task va task type cho employee, co chuc nang them, xoa va hien thi task
+Hien thi menu chinh gom cac lua chon:
+1. Add Task
+2. Delete Task
+3. Display Task
+4. Exit
+
+Task type la du lieu co dinh:
+1. Code
+2. Test
+3. Design
+4. Review
+
+Moi task gom cac thong tin: ID (int), TaskTypeID (int), Requirement Name (String), 
+                            Date (String), Plan From (double), Plan To (double), Assignee (String), Reviewer (String)
+ID duoc tao tu dong, neu danh sach rong thi bat dau tu 1, nguoc lai ID cua task moi bang ID cua task da tao cuoi cung cong 1 
+Requirement Name, Assignee va Reviewer khong de trong
+Date phai la ngay hop le theo dinh dang dd-MM-yyyy
+Plan From va Plan To nam trong khoang tu 8.0 den 17.5, cac moc cach nhau 0.5 va Plan From phai nho hon Plan To
+Khi hien thi task, sap xep theo ID tang dan va hien thi ten Task Type thay cho TaskTypeID
+Thoi gian cua task duoc tinh bang Plan To - Plan From
+
+* Mo ta thuat toan
+Chuong trinh gom lop Main de hien thi menu va lop quan ly task de xu ly cac chuc nang addTask, deleteTask va getDataTasks
+
+1. Hien thi menu:
+   Hien thi cac lua chon Add Task, Delete Task, Display Task va Exit
+   Nguoi dung nhap lua chon, kiem tra gia tri trong khoang tu 1 den 4
+   Neu lua chon khong hop le thi thong bao loi va yeu cau nhap lai
+   Neu chon 4 thi ket thuc chuong trinh
+   Neu chon 1, 2 hoac 3 thi goi ham xu ly tuong ung, sau do quay lai man hinh chinh
+
+2. Them task:
+   Ham addTask nhan cac thong tin Requirement Name, Assignee, Reviewer, TaskTypeID, Date, Plan From va Plan To
+   Kiem tra Requirement Name, Assignee va Reviewer khong bi null, rong hoac chi gom khoang trang
+   Dung wrapper class Integer de chuyen TaskTypeID sang so nguyen, chi chap nhan cac gia tri tu 1 den 4
+   Moi TaskTypeID tuong ung voi mot task type co dinh
+   Kiem tra chuoi Date dung dinh dang dd-MM-yyyy, gom 2 chu so ngay, 2 chu so thang va 4 chu so nam
+   Dung SimpleDateFormat voi setLenient(false) de kiem tra ngay thang nam ton tai, phai doc het chuoi ngay, khong chap nhan ky tu thua
+   Dung wrapper class Double de chuyen Plan From va Plan To sang so va kiem tra loi nhap so
+   Plan From va Plan To phai nam trong danh sach cac moc 8.0, 8.5, 9.0, 9.5, ..., 17.5
+   Neu Plan From lon hon hoac bang Plan To thi thong bao loi va yeu cau nhap lai
+   Neu tat ca thong tin hop le, tao task moi voi ID = 1 khi danh sach rong, nguoc lai ID cua task moi bang ID cua task da tao cuoi cung cong 1 
+   Them task vao danh sach va tra ve ID cua task vua tao
+   Neu du lieu khong hop le thi bao loi bang Exception, ham goi xu ly loi va yeu cau nhap lai, khong them task vao danh sach
+
+3. Xoa task:
+   Ham deleteTask nhan ID cua task can xoa
+   Dung wrapper class Integer de chuyen ID tu chuoi sang so nguyen
+   Neu ID khong phai so nguyen thi xu ly NumberFormatException va thong bao loi
+   Tim task co ID tuong ung trong danh sach, neu khong ton tai thi thong bao task khong ton tai
+   Neu tim thay thi xoa task khoi danh sach va quay lai man hinh chinh
+   Khong xoa task khi ID khong hop le hoac khong ton tai
+
+4. Hien thi task:
+   Ham getDataTasks tra ve danh sach task hien co
+   Sap xep danh sach theo ID tang dan truoc khi hien thi
+   Lay ten task type tu TaskTypeID: 1 la Code, 2 la Test, 3 la Design, 4 la Review
+   Tinh Time bang Plan To - Plan From
+   Hien thi cac cot ID, Name, Task Type, Date, Time, Assignee va Reviewer theo dung dinh dang giao dien
+   Neu danh sach rong thi thong bao khong co task de hien thi
+
+5. Xu ly loi:
+   Su dung try-catch de xu ly NullPointerException khi du lieu dau vao bi null
+   Su dung try-catch de xu ly NumberFormatException khi chuyen chuoi sang so that bai
+   Xu ly loi ngay khong hop le khi parse Date bang SimpleDateFormat
+   Khi co loi, hien thi thong bao phu hop va khong them hoac xoa du lieu khong hop le
+
+* Testcase
+- Menu chinh:
+1. Nhap bo trong (rong hoac khoang trang): thong bao loi lua chon va yeu cau nhap lai
+2. Nhap chuoi khong phai so nguyen ("abc") hoac so thuc ("1.5"): thong bao loi va yeu cau nhap lai
+3. Nhap lua chon ngoai khoang 1 den 4 ("0", "5", "-1"): thong bao loi lua chon khong hop le
+4. Chon "1": hien thi man hinh nhap thong tin Add Task
+5. Chon "2": hien thi man hinh nhap ID task can xoa
+6. Chon "3": hien thi danh sach task theo ID tang dan
+7. Chon "4": thoat chuong trinh
+
+- Them task - TaskTypeID:
+8. Nhap TaskTypeID bo trong: thong bao loi va khong them task
+9. Nhap TaskTypeID khong phai so nguyen ("abc", "1.5"): thong bao loi va yeu cau nhap lai
+10. Nhap TaskTypeID nho hon 1 hoac lon hon 4 ("0", "5"): thong bao TaskTypeID khong hop le
+11. Nhap TaskTypeID hop le:
+    VD: "1", "2", "3", "4", ket qua: chap nhan va gan lan luot Code, Test, Design, Review
+
+- Them task - thong tin yeu cau:
+12. Nhap Requirement Name bo trong hoac null: thong bao loi va khong them task
+13. Nhap Assignee bo trong hoac null: thong bao loi va khong them task
+14. Nhap Reviewer bo trong hoac null: thong bao loi va khong them task
+15. Nhap day du Requirement Name, Assignee va Reviewer:
+    VD: Requirement Name = "Dev Program", Assignee = "Dev", Reviewer = "Lead", ket qua: chap nhan thong tin
+
+- Them task - ngay:
+16. Nhap Date dung dinh dang va la ngay ton tai:
+    VD: "28-08-2015", "01-01-2024", "29-02-2024" (nam nhuan), ket qua: chap nhan
+17. Nhap Date sai dinh dang:
+    VD: "2015-08-28", "28/08/2015", " 28-8-2015", "28-08-2015abc", ket qua: thong bao Date phai theo dinh dang dd-MM-yyyy
+18. Nhap ngay khong ton tai:
+    VD: "31-02-2024", "32-01-2024", "29-02-2023" (khong phai nam nhuan), ket qua: thong bao Date khong hop le
+19. Nhap mot ngay trong qua khu nhung van dung dinh dang va ton tai:
+    VD: "28-08-2015", ket qua: chap nhan vi de khong yeu cau ngay phai lon hon ngay hien tai
+
+- Them task - Plan From va Plan To:
+20. Nhap Plan From hoac Plan To khong phai so:
+    VD: "abc", "9h", ket qua: bao loi va yeu cau nhap lai
+21. Nhap Plan From nho hon 8.0 hoac Plan To lon hon 17.5:
+    VD: From = "7.5", To = "9.0"; From = "9.0", To = "18.0", ket qua: thong bao gio lam viec khong hop le
+22. Nhap gio khong thuoc cac moc buoc 0.5:
+    VD: From = "8.25", To = "9.0" hoac From = "8.0", To = "9.25", ket qua: thong bao gio khong hop le
+23. Nhap Plan From bang Plan To:
+    VD: From = "9.0", To = "9.0", ket qua: thong bao Plan From phai nho hon Plan To
+24. Nhap Plan From lon hon Plan To:
+    VD: From = "10.0", To = "9.5", ket qua: thong bao loi va khong them task
+25. Nhap khoang gio hop le nho nhat o dau hoac cuoi ngay:
+    VD: From = "8.0", To = "8.5" hoac From = "17.0", To = "17.5", ket qua: them task thanh cong, Time = 0.5
+26. Nhap khoang gio hop le lon nhat:
+    VD: From = "8.0", To = "17.5", ket qua: them task thanh cong, Time = 9.5
+27. Nhap khoang gio theo vi du giao dien:
+    VD: From = "9.5", To = "17.5", ket qua: them task thanh cong, Time = 8.0
+
+- Kiem tra ID tu dong va them task thanh cong:
+28. Them task dau tien voi tat ca thong tin hop le:
+    VD: TaskTypeID = 1, Requirement Name = "Dev Program", Date = "28-08-2015", From = "9.5", To = "17.5", Assignee = "Dev", Reviewer = "Lead"
+    Ket qua: tao task co ID 1 va them vao danh sach
+29. Them task thu hai voi thong tin hop le:
+    Ket qua: ID cua task moi bang ID task cuoi cung cong 1, task moi co ID 2
+30. Them task co loi o mot truong bat ky:
+    Ket qua: bao loi bang Exception, khong them task va khong thay doi danh sach task cu
+
+- Xoa task:
+31. Nhap ID bo trong hoac null: thong bao loi va khong xoa task
+32. Nhap ID khong phai so nguyen ("abc", "1.5"): xu ly NumberFormatException va yeu cau nhap lai
+33. Nhap ID la so nguyen nhung khong ton tai trong danh sach:
+    VD: danh sach co ID 1, 2 ma nhap "5", ket qua: thong bao task khong ton tai
+34. Nhap ID cua task dang ton tai:
+    VD: nhap "1", ket qua: xoa task co ID 1 va quay lai man hinh chinh
+35. Xoa task da bi xoa truoc do: thong bao task khong ton tai, khong thay doi danh sach
+
+- Hien thi task:
+36. Hien thi khi danh sach rong: thong bao khong co task de hien thi
+37. Hien thi mot task hop le:
+    VD: ID = 1, Name = "Dev Program", Task Type = "Code", Date = "28-08-2015", Time = 8.0, Assignee = "Dev", Reviewer = "Lead"
+    Ket qua: hien thi day du thong tin theo dung ten cot
+38. Hien thi nhieu task: danh sach duoc sap xep theo ID tang dan
+    VD: danh sach dang co thu tu ID 3, 1, 2, ket qua: hien thi theo thu tu ID 1, 2, 3
+39. Kiem tra ten Task Type khi hien thi:
+    VD: TaskTypeID = 1, 2, 3, 4, ket qua: hien thi lan luot Code, Test, Design, Review thay vi chi hien thi so ID
+40. Kiem tra cach tinh Time:
+    VD: From = "9.5", To = "17.5", ket qua: Time = 8.0; From = "8.0", To = "10.5", ket qua: Time = 2.5
+41. Xoa mot task sau do hien thi lai: task da xoa khong con trong danh sach, cac task con lai van duoc sap xep theo ID tang dan
+42. Them task sau khi xoa mot task o giua danh sach:
+    VD: danh sach co ID 1, 2, 3, xoa ID 2 thi con ID 1, 3; task moi co ID 4
+    Khong lay so luong task hien tai cong 1 de gan ID, tranh trung ID cua task dang ton tai
+
+* Testcase end to end (kiem tra truc tiep tren giao dien console)
+Moi kich ban bat dau bang cach chay moi chuong trinh; danh sach ban dau rong
+Nhap theo thu tu cac buoc, moi gia tri duoc nhap khi chuong trinh hien thi loi nhac tuong ung
+Ky hieu <Enter> la nhap rong va nhan Enter; <space> la nhap chi khoang trang
+Du lieu task chi luu trong bo nho, khong duoc giu lai sau khi thoat chuong trinh
+
+E2E 1 - Them du 4 task type, hien thi, xoa va them lai
+1. Chon 3
+   Ket qua: hien thi "No task to display." va quay lai menu
+2. Chon 1, lan luot nhap:
+   Requirement Name: Dev Program
+   Task Type: 1
+   Date: 21-02-2025
+   From: 9.5
+   To: 17.5
+   Assignee: Dev
+   Reviewer: QA
+   Ket qua: them thanh cong, ID 1
+3. Chon 1, lan luot nhap: Test Program / 2 / 22-02-2025 / 8.0 / 10.5 / Dev / QA
+   Ket qua: them thanh cong, ID 2
+4. Chon 1, lan luot nhap: Design Program / 3 / 29-02-2024 / 8.0 / 8.5 / Designer / Lead
+   Ket qua: them thanh cong, ID 3; chap nhan ngay nhuan va khoang gio 0.5 dau ngay
+5. Chon 1, lan luot nhap: Review Program / 4 / 22-12-2025 / 17.0 / 17.5 / Reviewer / Lead
+   Ket qua: them thanh cong, ID 4; chap nhan khoang gio 0.5 cuoi ngay
+6. Chon 3
+   Ket qua: hien thi cac cot ID, Name, Task Type, Date, Time, Assignee, Reviewer;
+   cac dong theo ID tang dan:
+   1 / Dev Program    / Code   / 21-02-2025 / 8.0 / Dev      / QA
+   2 / Test Program   / Test   / 22-02-2025 / 2.5 / Dev      / QA
+   3 / Design Program / Design / 29-02-2024 / 0.5 / Designer / Lead
+   4 / Review Program / Review / 22-12-2025 / 0.5 / Reviewer / Lead
+7. Chon 2, nhap ID 3 (xoa sau do hien thi)
+   Ket qua: xoa thanh cong va quay lai menu
+8. Chon 3
+   1 / Dev Program    / Code   / 21-02-2025 / 8.0 / Dev      / QA
+   2 / Test Program   / Test   / 22-02-2025 / 2.5 / Dev      / QA
+   4 / Review Program / Review / 22-12-2025 / 0.5 / Reviewer / Lead
+9. Chon 1, lan luot nhap: New Task / 1 / 12-12-2025 / 8.0 / 17.5 / Dev / QA
+   Ket qua: them thanh cong, ID 5, khong dung lai ID 3
+10. Chon 3
+   1 / Dev Program    / Code   / 21-02-2025 / 8.0 / Dev      / QA
+   2 / Test Program   / Test   / 22-02-2025 / 2.5 / Dev      / QA
+   4 / Review Program / Review / 22-12-2025 / 0.5 / Reviewer / Lead
+   5 / New Task       / Code   / 12-12-2025 / 9.5 / Dev      / QA
+11. Chon 2, nhap ID 3
+    Ket qua: "Task does not exist."; danh sach khong thay doi, quay lai menu
+12. Chon 3 de xac nhan van con ID 1, 2, 4, 5; chon 4 de thoat
+
+E2E 2 - Kiem tra menu va nhap sai khi them task
+1. Tai menu lan luot nhap <Enter>, <space>, abc, 1.5, 0, 5, -1
+   Ket qua: moi gia tri deu bao "Invalid option. Please enter 1 to 4." va hien lai menu
+2. Chon 1, nhap du lieu sau; o moi truong sai, kiem tra thong bao va nhap lai ngay truong do:
+   - Requirement Name: <Enter>, <space>, sau do nhap Valid Task
+     Hai gia tri dau bao "Requirement Name must not be empty."
+   - Task Type: <Enter>, abc, 1.5, 0, 5, sau do nhap 2
+     Cac gia tri khong phai so nguyen bao loi so nguyen; 0 va 5 bao loi pham vi 1 den 4
+   - Date: 2015-08-28, 28/08/2015, 28-8-2015, 28-08-2015abc,
+     31-02-2024, 29-02-2023, sau do nhap 29-02-2024
+     Bon gia tri dau bao loi dinh dang; hai ngay khong ton tai bao "Date is invalid."
+   - From: abc, 7.5, 8.25, sau do nhap 8.0
+     abc bao loi so; 7.5 va 8.25 bao loi pham vi hoac buoc 0.5
+   - To: 9h, 18.0, 9.25, 8.0, 7.5, sau do nhap 8.5
+     9h bao loi so; 18.0, 9.25 va 7.5 bao loi pham vi hoac buoc 0.5;
+     8.0 bao "Plan From must be less than Plan To."
+   - Assignee: <space>, sau do nhap Dev; gia tri rong bao loi
+   - Reviewer: <Enter>, sau do nhap QA; gia tri rong bao loi
+3. Ket qua: chi sau khi tat ca truong hop le moi them thanh cong ID 1
+   Chon 3: chi co Valid Task, loai Test, ngay 29-02-2024, Time 0.5, Dev, QA
+4. Chon 4 de thoat
+
+E2E 3 - Xoa sai ID, xoa task cuoi va them khi danh sach rong
+1. Chon 1, lan luot nhap: First / 1 / 28-08-2015 / 8 / 9 / A / B
+   Ket qua: them ID 1, chap nhan ngay trong qua khu
+2. Chon 1, lan luot nhap: Second / 4 / 01-01-2024 / 9 / 10 / A / B
+   Ket qua: them ID 2
+3. Chon 2, lan luot nhap <Enter>, abc, 1.5, sau do nhap 5
+   Ket qua: ba gia tri dau bao "ID must be an integer." va yeu cau nhap lai;
+   ID 5 bao "Task does not exist." va quay lai menu
+4. Chon 3: danh sach van gom ID 1 va 2, khong co task nao bi xoa
+   1 / First  / Dev     / 28-08-2015 / 1 / A / B
+   2 / Second / Design  / 01-01-2024 / 1 / A / B
+5. Chon 2, nhap 2. Sau do chon 1 va nhap: Third / 3 / 01-01-2024 / 9 / 10 / A / B
+   Ket qua: ID moi la 2 vi task cuoi dang con co ID 1 ID cua task cuoi da xoa co the duoc dung lai
+6. Chon 2, nhap 1; chon 2, nhap 2; chon 3
+   Ket qua: xoa 2 task vua tao, danh sach rong
+7. Chon 1, nhap: Restart / 4 / 01-01-2024 / 8 / 17.5 / A / B
+   Ket qua: ID moi la 1 vi danh sach rong; chon 3 thay Review va Time 9.5
+   Hien thi:
+   1 / First / Dev / 01-01-2024 / 8.5 / A / B
+8. Chon 4 de thoat, chay lai chuong trinh va chon 3
+   Ket qua: danh sach rong vi du lieu khong luu sau khi thoat; chon 4 de ket thuc

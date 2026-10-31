@@ -1,0 +1,133 @@
+* Yeu cau phan mem
+Chuong trinh mo phong chuc nang dang nhap cua TBank
+Hien thi menu gom 3 lua chon: 1. Vietnamese, 2. English, 3. Exit
+Nguoi dung chon 1 de su dung giao dien tieng Viet, chon 2 de su dung giao dien tieng Anh, chon 3 de thoat chuong trinh
+Sau khi chon ngon ngu, nguoi dung lan luot nhap so tai khoan, mat khau va captcha
+So tai khoan phai gom dung 10 chu so
+Mat khau phai co tu 8 den 31 ky tu, gom chu cai va chu so (phai co it nhat mot chu cai va mot chu so)
+Chuong trinh sinh ngau nhien mot ma captcha gom 5 ky tu va hien thi de nguoi dung nhap
+Nguoi dung nhap mot ky tu co trong ma captcha
+Cac loi nhap lieu va loi nhac phai hien thi theo ngon ngu da chon; neu nhap sai thi thong bao loi va yeu cau nhap lai
+Khi so tai khoan, mat khau va captcha deu hop le thi thong bao dang nhap thanh cong
+
+* Mo ta thuat toan
+Lop Main hien thi menu, dieu huong theo lua chon cua nguoi dung va thuc hien dang nhap
+Lop Ebank gom cac ham doi ngon ngu, kiem tra so tai khoan, kiem tra mat khau, sinh captcha va kiem tra captcha
+
+1. Chon ngon ngu:
+   Kiem tra lua chon menu, chi chap nhan cac gia tri 1, 2, 3; neu sai thi thong bao loi va yeu cau nhap lai
+   Neu chon 3 thi thoat chuong trinh
+   Neu chon 1 hoac 2, goi setLocale(Locale locale) de chon ngon ngu tuong ung
+   Dung ResourceBundle doc noi dung theo key trong hai file Language_en_US.properties va Language_vi_VN.properties de lay loi nhac va thong bao loi
+
+2. Kiem tra so tai khoan:
+   Ham checkaccountNumber(String accountNumber) dung Regex de kiem tra chuoi nhap vao co dung 10 chu so hay khong
+   Giu so tai khoan o dang String de khong lam mat chu so 0 o dau
+   Neu khong hop le thi tra ve false, ham login hien thi thong bao loi theo ngon ngu da chon va yeu cau nhap lai so tai khoan
+   Neu hop le thi cho phep nhap mat khau
+
+3. Kiem tra mat khau:
+   Ham checkPassword(String password) dung Regex de kiem tra do dai tu 8 den 31 ky tu va dieu kien gom ca chu cai lan chu so
+   Khong chap nhan mat khau chi co chu, chi co so, co khoang trang
+   Neu khong hop le thi tra ve false, ham login hien thi thong bao loi theo ngon ngu da chon va yeu cau nhap lai
+   Neu hop le thi tra ve true va cho phep dien captcha
+
+4. Sinh ma captcha:
+   Ham generateCaptcha() dung Random sinh ma captcha co 5 ky tu gom cac ky tu ngau nhien va ghep thanh mot chuoi captcha
+   Tra ve chuoi captcha de hien thi va dung lam gia tri doi chieu, moi lan dang nhap sinh mot ma captcha
+   Neu nhap sai thi giu nguyen ma da sinh de nguoi dung nhap lai
+
+5. Kiem tra captcha:
+   Ham checkCaptcha(String captchaInput, String captchaGenerate) kiem tra nguoi dung da nhap it nhat mot ky tu
+   Dung captchaGenerate.contains(captchaInput) de kiem tra chuoi nhap vao co nam trong ma captcha hay khong
+   Cac ky tu nhap vao phai lien tiep va dung thu tu. Ham contains phan biet chu hoa, chu thuong
+   Nguoi dung chi can nhap 1 ky tu trong ma captcha (phan biet chu hoa, chu thuong) de hoan thanh captcha
+   Neu khong hop le thi tra ve false, ham login hien thi thong bao loi theo ngon ngu da chon va yeu cau nhap lai captcha
+   Neu hop le thi tra ve true
+
+6. Dang nhap:
+   Ham login(Ebank ebank, Scanner scanner) trong lop Main thuc hien quy trinh dang nhap
+   Lan luot doc so tai khoan va mat khau, goi cac ham kiem tra tuong ung cua Ebank
+   Neu du lieu khong hop le thi lay thong bao loi theo ngon ngu da chon va yeu cau nhap lai buoc do
+   Khi mat khau hop le, sinh va hien thi mot ma captcha, sau do yeu cau nguoi dung nhap captcha
+   Neu captcha sai thi thong bao loi va yeu cau nhap lai voi ma da sinh
+   Khi captcha hop le, hien thi thong bao dang nhap thanh cong va ket thuc chuong trinh
+
+* Testcase
+- Chon ngon ngu:
+1. Nhap bo trong (rong hoac khoang trang): thong bao loi dau vao khong hop le va yeu cau nhap lai
+2. Nhap ky tu ("abc") hoac so thuc ("1.5"): thong bao loi khong phai so nguyen va yeu cau nhap lai
+3. Nhap lua chon ngoai menu ("0", "4", "-1"): thong bao loi lua chon khong hop le va yeu cau nhap lai
+4. Chon "1": loi nhac nhap so tai khoan, mat khau, captcha va cac thong bao loi hien thi bang tieng Viet
+5. Chon "2": loi nhac nhap so tai khoan, mat khau, captcha va cac thong bao loi hien thi bang tieng Anh
+6. Chon "3": thoat chuong trinh, khong yeu cau nhap thong tin dang nhap
+
+- Nhap so tai khoan:
+7. Nhap bo trong (rong hoac khoang trang): thong bao loi va yeu cau nhap lai
+8. Nhap chuoi co chu cai, ky tu dac biet hoac khoang trang:
+   VD: "12345abcde", "12345@7890", "12345 7890", ket qua: thong bao so tai khoan phai gom dung 10 chu so
+9. Nhap it hon hoac nhieu hon 10 chu so:
+   VD: "123456789", "12345678901", ket qua: thong bao loi va yeu cau nhap lai
+10. Nhap dung 10 chu so:
+    VD: "1234567890", ket qua: chap nhan va chuyen sang nhap mat khau
+11. Nhap so tai khoan bat dau bang chu so 0:
+    VD: "0123456789", ket qua: chap nhan, giu nguyen chu so 0 o dau
+
+- Nhap mat khau:
+12. Nhap bo trong (rong hoac khoang trang): thong bao loi va yeu cau nhap lai
+13. Nhap mat khau it hon 8 ky tu:
+    VD: "Abc1234" (7 ky tu), ket qua: thong bao loi va yeu cau nhap lai
+14. Nhap mat khau nhieu hon 31 ky tu:
+    VD: 31 chu "a" va mot chu so "1" (32 ky tu), ket qua: thong bao loi va yeu cau nhap lai
+15. Nhap mat khau du do dai nhung chi co chu hoac chi co so:
+    VD: "abcdefgh", "12345678", ket qua: thong bao loi mat khau phai gom ca chu va so
+16. Nhap mat khau co ky tu dac biet hoac khoang trang:
+    VD: "Abc@1234", "Abc 1234", ket qua: thong bao loi va yeu cau nhap lai
+17. Nhap mat khau dung 8 ky tu va gom ca chu lan so:
+    VD: "abc12345", ket qua: chap nhan va chuyen sang buoc captcha
+18. Nhap mat khau dung 31 ky tu va gom ca chu lan so:
+    VD: 30 chu "a" va mot chu so "1", ket qua: chap nhan
+
+- Kiem tra captcha (gia su ma captcha la: "Ab3D9"):
+19. Nhap bo trong (rong hoac khoang trang): thong bao loi va yeu cau nhap lai
+20. Nhap mot ky tu co trong captcha:
+    VD: "3", ket qua: captcha hop le
+21. Nhap nhieu ky tu lien tiep co trong captcha hoac nhap toan bo ma:
+    VD: "b3", "Ab3D9", ket qua: captcha hop le
+22. Nhap ky tu khong co trong captcha hoac chuoi dai hon ma captcha:
+    VD: "Z", "Ab3D90", ket qua: thong bao captcha khong dung va yeu cau nhap lai
+23. Nhap cac ky tu co trong ma nhung khong lien tiep hoac sai thu tu:
+    VD: "A3", "3b", ket qua: captcha khong hop le
+24. Nhap sai chu hoa, chu thuong:
+    VD: "ab3D9", ket qua: captcha khong hop le
+
+- Kiem tra luong dang nhap:
+25. Nhap so tai khoan sai roi nhap lai dung, mat khau sai roi nhap lai dung, captcha sai roi nhap lai dung:
+    Chi chuyen buoc khi du lieu hien tai hop le; hoan tat kiem tra dang nhap sau khi ca ba deu dung
+    Thuc hien lai voi ca hai ngon ngu, cac thong bao phai dung ngon ngu da chon
+    (Hien thi tieng anh va tieng viet)
+26. Thuc hien nhieu lan dang nhap:
+    Moi lan deu goi sinh captcha ngau nhien, khong su dung mot ma gan co dinh
+    Ma ngau nhien van co the trung nhau, khong ket luan loi chi vi hai lan sinh ra cung mot ma
+
+27. Luong dang nhap bang tieng Viet:
+    - Chon 1 (Vietnamese) trong menu
+    - Nhap so tai khoan "123": hien thi "So tai khoan phai la 1 so va phai co 10 chu so" va yeu cau nhap lai
+    - Nhap so tai khoan "0123456789": chap nhan va dua den buoc tiep theo
+    - Nhap mat khau "abc": hien thi "Mat khau phai trong khoang 8-31 ky tu va phai chua ky tu va so" va yeu cau nhap lai
+    - Nhap mat khau "abc12345": chap nhan va dua den buoc tiep theo
+    - Chuong trinh sinh ma captcha "AkX9g"
+    - Nhap "1": hien thi "Captcha sai" va yeu cau nhap lai 
+    - Nhap mot ky tu co trong ma captcha do, dung chu hoa hoac chu thuong: "A"
+      hien thi "Dang nhap thanh cong" va ket thuc chuong trinh
+
+28. Luong dang nhap bang tieng Anh:
+    - Chay lai chuong trinh, chon 2 (English) trong menu
+    - Nhap so tai khoan "123": hien thi "Account number must be a number and must have 10 digits" va yeu cau nhap lai
+    - Nhap so tai khoan "9876543210": chap nhan va dua den buoc tiep theo
+    - Nhap mat khau "abc": hien thi "Password must be between 8 and 31 characters and must be alphanumeric" va yeu cau nhap lai
+    - Nhap mat khau "abc12345": chap nhan va dua den buoc tiep theo
+    - Chuong trinh sinh ma captcha "Rw0Go"
+    - Nhap "1": hien thi "Captcha incorrect" va yeu cau nhap lai 
+    - Nhap mot ky tu co trong ma captcha do, dung chu hoa hoac chu thuong: "R"
+      hien thi "Login Success" va ket thuc chuong trinh
