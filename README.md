@@ -7,6 +7,7 @@ Chia sẽ src một số bài đã pass lớp thầy donglm6
 - [J1.S.P0053 Bubble Sort](./J1.S.P0053-BubbleSort)
 - [J1.S.P0006 Binary Search](./J1.S.P0006-BinarySearch)
 - [J1.S.P0070 TPBank](./J1.S.P0070-TPBank)
-- [J1.S.P0071 TaskManagement](./J1.S.P0071-TaskManagement)
+- [J1.S.P0071 Task Management](./J1.S.P0071-TaskManagement)
+- [J1.L.P0021 Manage Student](./J1.L.P0021-ManageStudent)
 
 ## [Danh sách bài tập từ PTS](./AssigmentList/Readme.md)

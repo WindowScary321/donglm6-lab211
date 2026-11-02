@@ -1,0 +1,339 @@
+* Yeu cau phan mem
+Chuong trinh quan ly sinh vien bang Java Console, ap dung lap trinh huong doi tuong (OOP)
+Su dung ArrayList de luu tru danh sach sinh vien, chi su dung cac lop va chuc nang cua Java Core
+Hien thi menu chinh:
+1. Create
+2. Find and Sort
+3. Update/Delete
+4. Report
+5. Exit
+
+Moi ban ghi gom cac thong tin: ID, Student Name, Semester va Course Name
+Chi chap nhan 3 mon hoc: Java, .Net, C/C++
+Chuc nang Create cho phep nhap thong tin tu ban phim va tao it nhat 5 sinh vien
+Khi da nhap du 5 ban ghi, hoi "Do you want to continue (Y/N)?", chon Y de nhap tiep, chon N de quay lai menu chinh
+Sau moi ban ghi them thanh cong tu moc nay tro di, tiep tuc hoi Y/N
+Chuc nang Find and Sort tim theo ten hoac mot phan ten, sap xep ket qua theo Student Name tang dan va hien thi Student Name, Semester, Course Name
+Chuc nang Update/Delete tim theo ID, cho phep chon U de cap nhat hoac D de xoa
+Chuc nang Report thong ke so lan hoc tung mon cua moi sinh vien, hien thi Student Name | Course | Total 
+(sap xep theo Student Name tang dan, khong phan biet hoa thuong. Neu trung ten thi giu thu tu xuat hien ban dau)
+Chon Exit de ket thuc chuong trinh
+
+Cac quy uoc:
+- Mot sinh vien hoc mot mon trong mot hoc ky
+- Khong cho phep hai thong tin co cung ID, Semester va Course Name
+- Mot sinh vien duoc hoc nhieu mon khac nhau trong cung hoc ky, hoac hoc lai mot mon o hoc ky khac
+- Mot sinh vien khong duoc dang ky cung mot mon nhieu lan trong cung hoc ky
+  Thong tin bi xem la trung khi: ID + Semester + Course Name giong voi thong tin truoc
+- ID, Student Name va Semester khong duoc de trong hoac chi gom khoang trang
+- ID bat dau bang S hoac s, theo sau la it nhat mot chu so
+- Cac thong tin cung ID phai su dung cung Student Name, khi nhap ID da ton tai thi tu dong lay ten da co
+- Neu sinh vien dang ky nhieu mon trong 1 hoac nhieu ky, hien thi danh sach de nguoi dung chon dung ban ghi can cap nhat hoac xoa
+
+* Mo ta thuat toan
+Chuong trinh gom lop Student luu thong tin, lop quan ly xu ly danh sach va lop Main hien thi menu, nhan lua chon
+Lop Student gom cac thuoc tinh id, studentName, semester va courseName
+Su dung ArrayList<Student> de them, tim kiem, cap nhat va xoa ban ghi
+
+1. Hien thi menu:
+   Hien thi 5 lua chon Create, Find and Sort, Update/Delete, Report va Exit
+   Doc lua chon tu ban phim, chuyen sang so nguyen va kiem tra trong khoang 1 den 5
+   Neu rong, ko phai so nguyen hoac ngoai khoang thi thong bao loi
+   Neu chon 1 den 4 thi goi chuc nang tuong ung, thuc hien xong quay lai menu
+   Neu chon 5 thi ket thuc chuong trinh
+
+2. Tao sinh vien:
+   Nhap ID, kiem tra dung dang S/s theo sau la it nhat mot chu so
+   Neu rong hoac sai dinh dang thi thong bao loi va nhap lai
+   Tim ID trong danh sach, neu da ton tai thi lay Student Name cua ID do, neu chua ton tai thi nhap ten moi
+   Nhap Semester va Course Name, kiem tra du lieu khong rong va mon hoc thuoc Java, .Net, C/C++
+   Duyet danh sach de kiem tra 3 thong tin ID, Semester, Course Name
+   Neu da ton tai thi thong bao trung lap va yeu cau nhap lai
+   Neu khong trung lap thi tao doi tuong Student va them vao ArrayList
+   Khi danh sach co tu 5 tro len, hoi co muon tiep tuc hay khong
+   Neu nhap Y thi nhap sinh vien tiep theo, neu nhap N thi quay lai menu
+   Neu nhap lua chon khac Y/N thi thong bao loi va hoi lai
+   Neu vao lai Create khi danh sach da du 5 thi khong bat nhap them 5 ban ghi moi, sau khi them mot ban ghi, hoi Y/N
+
+3. Tim kiem va sap xep:
+   Neu danh sach rong thi thong bao khong co sinh vien de tim
+   Nhap ten hoac mot phan ten, kiem tra khong de trong
+   Chuyen ten va tu khoa ve cung dang chu thuong, dung contains de tim tat ca ban ghi co ten chua tu khoa
+   Them cac ban ghi phu hop vao danh sach ket qua
+   Neu ket qua rong thi thong bao khong tim thay sinh vien
+   Neu co ket qua thi dung Collections.sort() voi Comparator<Student>, cai dat compare() de so sanh Student Name khong phan biet hoa thuong
+   Sap xep theo toan bo Student Name "va id" tang dan (giang vien yeu cau sap xep theo ten va id, phong truong hop sinh vien trung ten)
+   Hien thi Student Name, Semester va Course Name cua tat ca ban ghi tim duoc
+   Chi sap xep danh sach ket qua, khong can thay doi thu tu danh sach goc
+
+4. Cap nhat hoac xoa:
+   Neu danh sach rong thi thong bao khong co du lieu de cap nhat hoac xoa
+   Nhap ID can tim, kiem tra dung dang S/s va chu so; neu sai thi yeu cau nhap lai ID
+   Khi ID hop le, lay tat ca ban ghi co ID tuong ung
+   Neu khong tim thay thi thong bao ID khong ton tai va quay lai menu
+   Neu tim thay nhieu ban ghi thi hien thi kem so thu tu va cho nguoi dung chon mot ban ghi (them sap xep vao day)
+   Kiem tra so thu tu la so nguyen trong khoang 1 den so ban ghi tim duoc
+   Hoi "Do you want to update (U) or delete (D) student?"
+   Chi chap nhan U/u hoac D/d; neu nhap sai thi yeu cau nhap lai
+
+   - Neu chon U:
+     Nhap thong tin moi, kiem tra du lieu giong khi tao sinh vien, ke ca quy uoc ID bat dau bang S/s va theo sau la chu so
+     Neu nhap ID da ton tai thi su dung ten cua ID do de giu thong tin nhat quan
+     Neu nhap ID moi thi yeu cau nhap Student Name moi
+     Kiem tra bo ba ID, Semester, Course Name voi cac ban ghi khac, bo qua chinh ban ghi dang sua
+     Neu trung voi ban ghi khac thi thong bao loi va giu nguyen du lieu cu
+     Neu thong tin hop le thi cap nhat dung ban ghi da chon va thong bao thanh cong
+     Neu khong thay doi thong tin thi khong xem ban ghi la trung voi chinh no
+
+   - Neu chon D:
+     Xoa dung doi tuong Student da chon khoi ArrayList
+     Khong xoa tat ca cac ban ghi cung ID neu nguoi dung chi chon mot ban ghi
+     Thong bao xoa thanh cong va quay lai menu
+
+5. Bao cao:
+   Neu danh sach rong thi thong bao khong co du lieu de bao cao
+   Duyet tung ban ghi va nhom theo ID va Course Name
+   Voi moi nhom, dem so ban ghi cua sinh vien hoc mon do qua cac hoc ky
+   Co the dung mot Map voi khoa gom ID va Course Name, moi lan gap nhom do thi tang Total len 1
+   Sap xep danh sach bao cao theo Student Name tang dan, khong phan biet hoa thuong
+   Dung Collections.sort() voi Comparator<Report>, so sanh ten bang compareToIgnoreCase()
+   Neu trung ten thi giu thu tu xuat hien ban dau cua cac nhom
+   Hien thi Student Name | Course | Total
+   Khong tach nhom theo Semester vi bao cao can tong so lan hoc mon do
+   Khong gop hai sinh vien khac ID chi vi trung Student Name
+   Vi du: S1 hoc Java o Fall2024 va Spring2025 thi hien thi Nguyen Van A | Java | 2
+   Neu S1 con hoc .Net thi hien thi them mot dong Nguyen Van A | .Net | 1
+   Moi nhom chi hien thi mot dong, khong lap lai dong bao cao cho tung ban ghi
+   Bao cao duoc tinh tu du lieu hien tai de phan anh dung ket qua sau khi them, sua hoac xoa
+
+* Testcase
+- Menu chinh:
+1. Nhap bo trong (rong hoac khoang trang): thong bao loi va yeu cau nhap lai
+2. Nhap chuoi khong phai so nguyen ("abc", "1.5"): thong bao loi va yeu cau nhap lai
+3. Nhap lua chon ngoai khoang 1 den 5 ("0", "6", "-1"): thong bao lua chon khong hop le
+4. Chon 1, 2, 3, 4: goi dung chuc nang Create, Find and Sort, Update/Delete, Report
+5. Chon 5: thoat chuong trinh, khong yeu cau nhap them thong tin
+
+- Tao sinh vien - nhap lieu:
+6. Kiem tra ID khi tao sinh vien:
+   - Nhap rong hoac chi gom khoang trang: thong bao loi va yeu cau nhap lai
+   - Nhap sai dinh dang: "123", "HE123", "S", "s", "S12A", "SS1", "S-1", "S 1", "S1.5": thong bao loi va nhap lai ngay ID
+   - Nhap "S1", "s123", "S001": chap nhan va chuyen sang truong tiep theo
+   - Nhap " s006 ": chap nhan ID s006 sau khi trim, giu nguyen hai chu so 0
+   - Khong them ban ghi hoac tinh tang so luong khi ID chua hop le
+7. Nhap Student Name rong hoac chi gom khoang trang cho ID moi: thong bao loi va yeu cau nhap lai
+8. Nhap Semester rong hoac chi gom khoang trang: thong bao loi va yeu cau nhap lai
+9. Nhap mon hoc khong thuoc Java, .Net, C/C++: thong bao loi va yeu cau nhap lai
+   Neu dung menu mon hoc, thu nhap "0", "4", "abc", "1.5" va chuoi rong: khong chap nhan
+10. Nhap ID moi voi day du thong tin hop le:
+    VD: S1 / Nguyen Van A / Fall2024 / Java, ket qua: them thanh cong mot ban ghi
+11. Nhap ID da ton tai nhung khac hoc ky:
+    VD: da co S1 / Nguyen Van A / Fall2024 / Java, them S1 / Spring2025 / Java
+    Ket qua: su dung ten Nguyen Van A va them thanh cong
+12. Nhap ID da ton tai, cung hoc ky nhung khac mon:
+    VD: them S1 / Fall2024 / .Net, ket qua: them thanh cong
+13. Nhap trung ID, Semester va Course Name:
+    VD: nhap lai S1 / Fall2024 / Java, ket qua: thong bao trung lap, danh sach khong doi
+14. Hai sinh vien khac ID co cung ten:
+    VD: S1 va S2 deu ten Nguyen Van A, ket qua: duoc phep ton tai va van phan biet bang ID
+
+- Tao sinh vien - moc 5 va lua chon tiep tuc:
+15. Danh sach dang co 4 ban ghi: tiep tuc yeu cau nhap, chua hoi Y/N de dung
+16. Them thanh cong ban ghi thu 5: hien thi cau hoi tiep tuc Y/N
+17. Tai moc 5, nhap N/n: quay lai menu, giu nguyen 5 ban ghi
+18. Tai moc 5, nhap Y/y: cho phep nhap ban ghi thu 6; them xong tiep tuc hoi Y/N
+19. Tai cau hoi tiep tuc, nhap rong, "abc" hoac "1": thong bao loi va hoi lai Y/N
+20. Khi dang co 4 ban ghi, nhap trung hoac sai thong tin:
+    Ket qua: van chi co 4 ban ghi, khong tinh lan nhap loi thanh ban ghi thu 5
+21. Vao lai Create khi da co 5 ban ghi, them mot ban ghi hop le roi chon N:
+    Ket qua: danh sach co 6 ban ghi, khong bat nhap them du 5 ban ghi moi
+
+- Tim kiem va sap xep:
+22. Tim kiem khi danh sach rong: thong bao khong co sinh vien de tim
+23. Nhap tu khoa rong hoac chi gom khoang trang: thong bao loi va yeu cau nhap lai
+24. Tim theo day du ten:
+    VD: nhap "Nguyen Van A", ket qua: hien thi tat ca ban ghi cua cac sinh vien co ten phu hop
+25. Tim theo mot phan ten:
+    VD: nhap "Nguyen", ket qua: hien thi cac ten co chua Nguyen
+26. Tim khong phan biet hoa thuong:
+    VD: "ngUYEN" va "Nguyen" cho cung tap ket qua
+27. Tu khoa khong ton tai:
+    VD: nhap "Hoang" khi khong co ten chua Hoang, ket qua: thong bao khong tim thay
+28. Tim thay nhieu ten:
+    VD: danh sach co Nguyen Van B, Nguyen An, Nguyen Van A; tim "Nguyen"
+    Ket qua: thu tu ten la Nguyen An, Nguyen Van A, Nguyen Van B
+29. Mot sinh vien co nhieu ban ghi phu hop: hien thi du tung Semester va Course Name, khong chi lay ban ghi dau tien
+30. Kiem tra cot hien thi: co Student Name, Semester, Course Name; cac ban ghi cung ten khong bat buoc sap xep them theo hoc ky hoac mon
+
+- Cap nhat hoac xoa:
+31. Chon Update/Delete khi danh sach rong: thong bao khong co du lieu
+32. Nhap ID rong hoac sai dinh dang ("123", "HE123", "S", "S12A") khi tim de cap nhat/xoa:
+    Thong bao loi va yeu cau nhap lai ngay ID, chua cho phep chon ban ghi
+33. Nhap ID dung dinh dang nhung khong ton tai (VD: S100): thong bao khong tim thay, danh sach khong thay doi
+34. Nhap ID co nhieu ban ghi: hien thi day du cac ban ghi va cho chon so thu tu
+35. Nhap so thu tu rong, "abc", "1.5", "0" hoac lon hon so ban ghi tim duoc: thong bao loi va yeu cau nhap lai
+36. Nhap lua chon khac U/u/D/d: thong bao loi va yeu cau nhap lai
+37. Chon U va thay doi Semester hoac Course Name sang thong tin hop le, khong trung: cap nhat thanh cong
+38. Chon U nhung thong tin moi trung voi mot ban ghi khac: thong bao trung lap, giu nguyen ban ghi cu
+39. Chon U va nhap lai nguyen thong tin cu: khong bao trung voi chinh ban ghi dang sua
+40. Chon U va doi sang ID moi:
+    Nhap ID sai dinh dang thi bao loi va yeu cau nhap lai ID, chua thay doi du lieu cu
+    Nhap ID hop le chua ton tai (VD: S10) thi nhap ten moi va cap nhat dung ban ghi duoc chon
+41. Chon U va doi sang ID da ton tai: su dung ten cua ID dich, van kiem tra trung hoc ky va mon hoc
+42. Chon D voi ID co nhieu ban ghi: chi xoa ban ghi da chon, cac ban ghi cung ID con lai van ton tai
+43. Xoa ban ghi cuoi cung cua mot ID roi tim lai ID do: thong bao khong tim thay
+44. Sua hoac xoa mot ban ghi, sau do Find and Sort: ket qua phan anh dung danh sach moi
+
+- Bao cao:
+45. Bao cao khi danh sach rong: thong bao khong co du lieu de bao cao
+46. Mot sinh vien hoc mot mon o mot hoc ky:
+    VD: S1 / Nguyen Van A / Fall2024 / Java, ket qua: Nguyen Van A | Java | 1
+47. Mot sinh vien hoc cung mon qua nhieu hoc ky:
+    VD: S1 hoc Java o Fall2024, Spring2025 va Summer2025, ket qua: Nguyen Van A | Java | 3
+48. Mot sinh vien hoc nhieu mon: hien thi tung dong thong ke rieng cho Java, .Net va C/C++ neu co du lieu
+49. Hai sinh vien khac ID hoc cung mon: hien thi tung nhom rieng, khong cong tong cua hai sinh vien
+50. Hai sinh vien khac ID nhung cung ten va cung mon: van tao hai nhom rieng theo ID, du cac cot hien thi co the giong nhau
+51. Cap nhat mon hoc tu Java sang .Net: Total cua Java giam 1, Total cua .Net tang 1 cho sinh vien do
+52. Cap nhat hoc ky nhung khong doi ID va mon hoc: Total khong thay doi
+53. Xoa mot ban ghi Java trong nhom co Total = 2: bao cao moi co Total = 1
+54. Xoa ban ghi cuoi cung cua mot nhom: dong bao cao cua nhom do khong con, khong hien thi Total = 0
+55. Goi Report nhieu lan lien tiep khi du lieu khong doi: ket qua khong doi, khong bi cong don Total
+
+* Testcase end to end
+
+(them cac truong hop test ngan hon nhu chi co 3 ban ghi)
+
+E2E 1 - Tao du 5 ban ghi, tim kiem va bao cao
+1. Chon 1, lan luot nhap 5 ban ghi:
+   S1 / Nguyen Van A / Fall2024   / Java
+   S2 / Tran Van B   / Fall2024   / .Net
+   S3 / Le Van C     / Fall2024   / C/C++
+   S4 / Nguyen An    / Fall2024   / Java
+   S5 / Vu Van D     / Spring2025 / Java
+   Ket qua: them thanh cong 5 ban ghi, khong hoi dung truoc khi du 5
+2. Sau ban ghi thu 5, tai cau hoi tiep tuc nhap N
+   Ket qua: quay lai menu, danh sach co dung 5 ban ghi
+3. Chon 2, nhap Nguyen
+   Ket qua: hien thi theo Student Name tang dan:
+   Nguyen An    | Fall2024 | Java
+   Nguyen Van A | Fall2024 | Java
+4. Chon 2, nhap ngUYEN
+   Ket qua: cung tap ket qua va thu tu ten nhu buoc 3
+5. Chon 4
+   Ket qua: co 5 nhom sau, khong bat buoc thu tu dong bao cao:
+   Nguyen Van A | Java  | 1
+   Tran Van B   | .Net  | 1
+   Le Van C     | C/C++ | 1
+   Nguyen An    | Java  | 1
+   Vu Van D     | Java  | 1
+6. Chon 5 de thoat
+
+E2E 2 - Cung ID hoc nhieu ky, nhieu mon va kiem tra trung lap
+Them tung sinh vien, tung mon khac nhau, phuc vu test xoa va sua
+1. Chon 1, lan luot nhap:
+   S1 / Nguyen Van A / Fall2024   / Java
+   S2 / Tran Van B   / Fall2024   / .Net
+   S3 / Le Van C     / Fall2024   / C/C++
+   S4 / Nguyen An    / Fall2024   / Java
+2. Thu nhap lai S1 / Fall2024 / Java
+   Ket qua: tu dong lay ten Nguyen Van A, thong bao trung lap, danh sach van co 4 ban ghi
+3. Nhap ban ghi hop le S1 / Spring2025 / Java
+   Ket qua: them thanh cong ban ghi thu 5, hoi Y/N
+4. Chon Y, nhap S1 / Fall2024 / .Net, sau do chon N
+   Ket qua: danh sach co 6 ban ghi; S1 duoc hoc hai mon khac nhau trong Fall2024
+5. Chon 2, nhap Nguyen Van A
+   Ket qua: hien thi du 3 ban ghi cua S1:
+   Nguyen Van A | Fall2024   | Java
+   Nguyen Van A | Spring2025 | Java
+   Nguyen Van A | Fall2024   | .Net
+   Cac dong cung ten khong bat buoc sap xep theo thu tu hoc ky hoac mon
+6. Chon 4
+   Ket qua: co cac nhom sau:
+   Nguyen Van A | Java  | 2
+   Nguyen Van A | .Net  | 1
+   Tran Van B   | .Net  | 1
+   Le Van C     | C/C++ | 1
+   Nguyen An    | Java  | 1
+7. Chon 4 lan nua: ket qua khong doi, Total khong bi cong don
+8. Chon 5 de thoat
+
+E2E 3 - Cap nhat, chan trung lap, xoa va doi chieu bao cao
+1. Chon 1, tao 5 ban ghi sau roi chon N:
+   S1 / Nguyen Van A / Fall2024   / Java
+   S1 / Spring2025 / Java
+   S1 / Fall2024   / .Net
+   S2 / Tran Van B / Fall2024   / .Net
+   S3 / Le Van C   / Fall2024   / C/C++
+2. Chon 3, nhap S1, chon ban ghi Spring2025 / Java theo so thu tu hien thi, chon U
+   Nhap thong tin moi S1 / Fall2024 / Java
+   Ket qua: bao trung voi ban ghi Java o Fall2024, du lieu cu van la Spring2025 / Java
+3. Chon 3, nhap S1, chon lai ban ghi Spring2025 / Java, chon U
+   Nhap thong tin moi S1 / Summer2025 / Java
+   Ket qua: cap nhat thanh cong, so ban ghi van la 5
+4. Chon 4
+   Ket qua: Nguyen Van A | Java | 2 va Nguyen Van A | .Net | 1; doi hoc ky khong doi Total
+5. Chon 3, nhap S1, chon ban ghi Fall2024 / .Net, chon D
+   Ket qua: chi xoa ban ghi .Net, van con 2 ban ghi Java cua S1
+6. Chon 4
+   Ket qua: Nguyen Van A | Java | 2; khong con dong Nguyen Van A | .Net | 1
+   Tran Van B | .Net | 1 va Le Van C | C/C++ | 1 van con
+7. Chon 3, nhap S1, chon ban ghi Fall2024 / Java, chon D
+   Chon 4: Nguyen Van A | Java | 1
+8. Chon 3, nhap S1, xoa ban ghi Java con lai
+   Chon 3 va tim lai S1: thong bao khong tim thay
+   Chon 4: chi con Tran Van B | .Net | 1 va Le Van C | C/C++ | 1
+9. Chon 5 de thoat
+
+E2E 4 - Nhap sai, danh sach rong va lua chon khong hop le
+1. Tai menu lan luot nhap <Enter>, <space>, abc, 1.5, 0, 6, -1
+   Ket qua: moi gia tri deu thong bao loi va yeu cau nhap lai, chuong trinh khong bi dung dot ngot
+2. Chon 2, 3 va 4 lan luot khi danh sach rong
+   Ket qua: moi chuc nang thong bao khong co du lieu phu hop va quay lai menu
+3. Chon 1, tai ID nhap <Enter>, <space>, sau do nhap S1
+   Tai ten nhap <Enter>, sau do nhap Nguyen Van A
+   Tai hoc ky nhap <space>, sau do nhap Fall2024
+   Neu dung menu mon hoc, nhap abc, 0, 4, sau do nhap 1
+   Ket qua: cac gia tri sai bi tu choi tai truong tuong ung; chi them khi day du du lieu hop le
+4. Nhap them 4 ban ghi hop le de du 5:
+   S2 / Tran Van B / Fall2024 / .Net
+   S3 / Le Van C   / Fall2024 / C/C++
+   S4 / Nguyen An  / Fall2024 / Java
+   S5 / Vu Van D   / Fall2024 / Java
+5. Tai cau hoi Y/N, nhap <Enter>, abc, sau do nhap n
+   Ket qua: hai gia tri dau bi tu choi, n dua ve menu; danh sach van co 5 ban ghi
+6. Chon 3, tim S100
+   Ket qua: thong bao khong tim thay ID, khong thay doi du lieu
+7. Chon 3, tim S1; tai so thu tu ban ghi nhap abc, 0, 2, sau do nhap 1
+   Ket qua: chi chap nhan 1 vi S1 chi co mot ban ghi
+   Tai lua chon U/D, nhap X, sau do nhap u
+   Nhap lai S1 / Fall2024 / Java
+   Ket qua: X bi tu choi; u duoc chap nhan; khong bao trung voi chinh ban ghi dang sua
+8. Chon 2, nhap Hoang
+   Ket qua: thong bao khong tim thay, danh sach khong thay doi
+9. Chon 5 de thoat
+
+E2E 5 - Bat buoc kiem tra ID tai moi lan nhap
+1. Chon 1, tao 5 ban ghi hop le nhu E2E 1, chon N de ve menu
+2. Chon 1, tai ID lan luot nhap 123, HE123, S, s, S12A, S-1, S1.5, "S 1", SS1
+   Ket qua: moi gia tri deu bao loi dinh dang va yeu cau nhap lai ID, khong hoi ten hay hoc ky
+   Nhap " s006 ", ten New Student, hoc ky Fall2024, mon C/C++; chon N
+   Ket qua: them thanh cong ban ghi thu 6 voi ID s006, khong lam mat chu so 0
+3. Chon 3, tai ID can tim nhap 123, HE123, S, S12A, sau do nhap s006
+   Ket qua: bon ID dau bi tu choi, s006 tim thay dung ban ghi; chon ban ghi 1 va U
+4. Tai ID moi khi cap nhat, nhap 456, HE456, S, S-2, S2A, sau do nhap " s007 "
+   Ket qua: nam ID dau bi tu choi, chi chuyen sang nhap ten khi ID s007 hop le
+   Nhap ten Updated Student, hoc ky Spring2025, mon .Net
+   Ket qua: cap nhat thanh cong, ban ghi co ID s007; so luong van la 6
+5. Chon 3, tai ID can tim nhap 007, HE7, S, sau do nhap s007
+   Ket qua: ba ID dau bi tu choi, s007 tim thay ban ghi da cap nhat
+   Chon ban ghi 1 va D: xoa thanh cong dung ban ghi cua Updated Student
+6. Chon 4
+   Ket qua: chi con 5 sinh vien ban dau; khong con New Student hoac Updated Student
+7. Chon 5 de thoat
+
+Ghi chu: Vi du Report trong anh de co dong Nguyen Van C khong khop voi du lieu dau vao va thieu dong .Net cua Nguyen Van B
+Can tinh theo du lieu thuc te, khong sao chep nguyen ket qua minh hoa bi lech
+Voi du lieu trong vi du do, ket qua dung la:
+Nguyen Van A | Java | 2
+Nguyen Van B | .Net | 1
+Nguyen Van B | Java | 1
