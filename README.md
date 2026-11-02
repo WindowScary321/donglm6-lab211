@@ -1,5 +1,5 @@
 # donglm6-lab211
-Chia sẽ src một số bài đã pass lớp thầy donglm6
+Chia sẻ một số src lab211 đã review với thầy donglm6
 
 ## Danh sách bài đã làm
 - [J1.S.P0009 Fibonacci](./J1.S.P0009-Fibonacci/)
